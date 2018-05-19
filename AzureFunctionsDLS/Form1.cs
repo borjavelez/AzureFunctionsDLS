@@ -15,6 +15,7 @@ namespace AzureFunctionsDLS
 {
     public partial class Form1 : Form
     {
+        #region UI code
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +25,29 @@ namespace AzureFunctionsDLS
         {
             this.comboBox1.SelectedIndex = 0;
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_ClickAsync(sender, e);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 1 && textBox1.Text.Length % 8 != 0)
+            {
+                label2.Visible = true;
+                button1.Enabled = false;
+            }
+            else
+            {
+                label2.Visible = false;
+                button1.Enabled = true;
+            }
+        }
+        #endregion
 
         private async void button1_ClickAsync(object sender, EventArgs e)
         {
@@ -66,16 +90,8 @@ namespace AzureFunctionsDLS
                 else
                 {
                     // Something wrong happened
-                    return "Error! Something wrong happened";
+                    return "Ups! Something wrong happened";
                 }
-            }
-        }
-
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button1_ClickAsync(sender, e);
             }
         }
     }
